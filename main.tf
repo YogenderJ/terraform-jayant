@@ -1,3 +1,29 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "3.26.0"
+    }
+    random = {
+      source  = "hashicorp/random"
+      version = "3.0.1"
+    }
+  }
+  required_version = ">= 1.1.0"
+
+  cloud {
+    organization = "github-actions-terraform-ec2"
+
+    workspaces {
+      name = "terraform-github-2"
+    }
+  }
+}
+
+provider "aws" {
+  region = "us-west-1"
+}
+
 resource "aws_instance" "EC2-Instance" {
   ami           = var.ami_id
   #key_name = var.key_name
