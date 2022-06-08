@@ -1,3 +1,25 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "3.26.0"
+    }
+    random = {
+      source  = "hashicorp/random"
+      version = "3.0.1"
+    }
+  }
+  required_version = ">= 1.1.0"
+
+  cloud {
+    organization = "github-actions-terraform-ec2"
+
+    workspaces {
+      name = "terraform-github-2"
+    }
+  }
+}
+
 
 resource "aws_instance" "EC2-Instance" {
   ami           = var.ami_id
@@ -31,7 +53,7 @@ resource "aws_security_group" "security_grp" {
 
 variable "aws_region" {
        description = "The AWS region to create things in."
-       default     = "eu-west-1"
+       default     = "us-west-1"
 }
 
 
